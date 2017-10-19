@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">汉字</string>
+    <string name="hsk_1">1级</string>
+    <string name="hsk_2">2级</string>
+    <string name="hsk_3">3级</string>
+    <string name="hsk_4">4级</string>
+    <string name="hsk_5">5级</string>
+    <string name="hsk_6">6级</string>
+</resources>
