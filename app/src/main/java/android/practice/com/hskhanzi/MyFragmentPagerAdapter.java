@@ -22,13 +22,13 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         return PAGE_COUNT;
     }
 
+    //TODO Send data to fragments
     @Override
     public Fragment getItem(int position){
         if (position == 0){
-            return StatsFragment.newInstance("","");
+            return StatsFragment.newInstance();
         }else {
-            //TODO Change return value, return HanziFragment(to be implemented)
-            return StatsFragment.newInstance("","");
+            return HanziFragment.newInstance(position);
         }
     }
 
