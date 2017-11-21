@@ -24,7 +24,7 @@ public class CreateDatabase extends SQLiteOpenHelper{
     private Context mContext;
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "HSKHanzi";
-    private final String TABLE = "characters";
+    final String TABLE = "characters";
     public static final String ID = "_id";
     public static final String HSK = "hsk";
     public static final String HANZI = "hanzi";
@@ -45,14 +45,15 @@ public class CreateDatabase extends SQLiteOpenHelper{
                 + HANZI + " text, "
                 + PINYIN + " text, "
                 + ENGLISH + " text, "
-                + LEVEL + " text, "
+                + LEVEL + " text"
                 + ")";
 
         sqLiteDatabase.execSQL(sql);
 
+        // Read data from a .CSV file and use it to populate the database
         BufferedReader reader = null;
         try{
-            reader = new BufferedReader(new InputStreamReader(mContext.getAssets().open("Data.csv"), "UTF-8"));
+            reader = new BufferedReader(new InputStreamReader(mContext.getAssets().open("data.csv"), "UTF-8"));
 
             String myLine;
             String[] values;

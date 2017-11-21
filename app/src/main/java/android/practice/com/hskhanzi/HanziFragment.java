@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class HanziFragment extends Fragment {
 
-    private static final String ARG_HSK_LEVEL = "hsk-level";
     private OnListFragmentInteractionListener mListener;
 
     //TODO Populate hanziList with data from the database
@@ -28,10 +27,10 @@ public class HanziFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static HanziFragment newInstance(int hsk) {
+    public static HanziFragment newInstance(ArrayList<Hanzi> hanziList) {
         HanziFragment fragment = new HanziFragment();
+        // TODO Create bundle with hanziList
         Bundle args = new Bundle();
-        args.putInt(ARG_HSK_LEVEL, hsk);
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,9 +41,8 @@ public class HanziFragment extends Fragment {
 
         // Retrieve the HSK level to populate the fragment accordingly
         if (getArguments() != null){
-            hskLevel = getArguments().getInt(ARG_HSK_LEVEL);
+            // TODO Receive bundle here
         }
-
     }
 
     @Override
@@ -58,7 +56,7 @@ public class HanziFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            //TODO Populate hanziList with data from the database sending HSKLevel as parameter
+            //TODO Populate hanziList with data from the database
             Hanzi hanziItemDummy_1 = new Hanzi("0","1", "我", "wo", "Me", "1");
             Hanzi hanziItemDummy_2 = new Hanzi("1","1", "你", "ni", "you", "1");
 

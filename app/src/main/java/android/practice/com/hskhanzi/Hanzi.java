@@ -3,7 +3,6 @@ package android.practice.com.hskhanzi;
 /**
  * Holds values of a hanzi character
  */
-
 class Hanzi {
     private String id;
     private String hsk;
