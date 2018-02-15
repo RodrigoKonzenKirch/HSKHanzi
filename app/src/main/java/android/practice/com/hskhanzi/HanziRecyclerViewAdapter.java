@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.practice.com.hskhanzi.HanziFragment.OnListFragmentInteractionListener;
+import android.widget.Toast;
+
 import java.util.List;
 
 /**
@@ -29,10 +31,22 @@ public class HanziRecyclerViewAdapter extends RecyclerView.Adapter<HanziRecycler
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         holder.mHanziView.setText(mHanziListValues.get(position).getHanzi());
         holder.mPinyinView.setText(mHanziListValues.get(position).getPinyin());
+        holder.mHanziView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(holder.mHanziView.getContext(),
+                        mHanziListValues.get(holder.getAdapterPosition()).getHanzi()+
+                                " ( "+
+                                mHanziListValues.get(holder.getAdapterPosition()).getPinyin()+
+                                " )"+
+                                "\n"+
+                                mHanziListValues.get(holder.getAdapterPosition()).getEnglish() , Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 

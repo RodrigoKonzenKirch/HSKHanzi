@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,20 +20,18 @@ import java.util.List;
 public class HanziFragment extends Fragment {
 
     private OnListFragmentInteractionListener mListener;
-
-    //TODO Populate hanziList with data from the database
-    @SuppressWarnings("unused")
+    public static final String ARG_HANZILIST = "hanziList";
     List<Hanzi> hanziList;
-    int hskLevel = 1;
 
     public HanziFragment() {
         // Required empty public constructor
     }
 
-    public static HanziFragment newInstance(ArrayList<Hanzi> hanziList) {
+    public static HanziFragment newInstance(ArrayList<Hanzi> argHanziList) {
         HanziFragment fragment = new HanziFragment();
-        // TODO Create bundle with hanziList
+
         Bundle args = new Bundle();
+        args.putSerializable(ARG_HANZILIST, argHanziList);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,9 +40,8 @@ public class HanziFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Retrieve the HSK level to populate the fragment accordingly
         if (getArguments() != null){
-            // TODO Receive bundle here
+            hanziList = (ArrayList<Hanzi>) getArguments().getSerializable(ARG_HANZILIST);
         }
     }
 
@@ -56,14 +56,7 @@ public class HanziFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            //TODO Populate hanziList with data from the database
-            Hanzi hanziItemDummy_1 = new Hanzi("0","1", "我", "wo", "Me", "1");
-            Hanzi hanziItemDummy_2 = new Hanzi("1","1", "你", "ni", "you", "1");
-
-            List<Hanzi> hanziListDummy = new ArrayList<>();
-            hanziListDummy.add(hanziItemDummy_1);
-            hanziListDummy.add(hanziItemDummy_2);
-            recyclerView.setAdapter(new HanziRecyclerViewAdapter(hanziListDummy, mListener));
+            recyclerView.setAdapter(new HanziRecyclerViewAdapter(hanziList, mListener));
         }
         return view;
     }

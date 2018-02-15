@@ -1,9 +1,11 @@
 package android.practice.com.hskhanzi;
 
+import java.io.Serializable;
+
 /**
  * Holds values of a hanzi character
  */
-class Hanzi {
+class Hanzi implements Serializable{
     private String id;
     private String hsk;
     private String hanzi;
