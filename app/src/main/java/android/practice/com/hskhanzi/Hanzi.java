@@ -12,6 +12,8 @@ class Hanzi implements Serializable{
     private String pinyin;
     private String english;
     private String level;
+    public static final int LEVEL_MIN_VALUE = 0;
+    public static final int LEVEL_MAX_VALUE = 4;
 
     Hanzi(String id, String hsk, String hanzi, String pinyin, String english, String level){
         this.id = id;

@@ -10,4 +10,5 @@
     <color name="green">#00FF00</color>
     <color name="cyan">#00FFFF</color>
     <color name="white">#FFFFFF</color>
+    <color name="lightGray">#FFCCCCCC</color>
 </resources>

@@ -1,10 +1,9 @@
 package android.practice.com.hskhanzi;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -182,5 +181,81 @@ public class DatabaseController {
         mSqLiteDatabase.close();
         cursor.close();
         return hanziArrayList;
+    }
+
+    void levelPlusOne(int id){
+        int level = 0;
+        SQLiteDatabase mSqLiteDatabase;
+        mSqLiteDatabase = database.getWritableDatabase();
+
+        String[] columns = {CreateDatabase.LEVEL};
+        String selection = CreateDatabase.ID+" = ? ";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = mSqLiteDatabase.query(database.TABLE, columns,
+                selection, selectionArgs, null, null, null);
+
+        if (cursor.getCount() > 0){
+            cursor.moveToNext();
+
+            level = Integer.parseInt(cursor.getString(cursor.getColumnIndex(CreateDatabase.LEVEL)));
+            level++;
+        }
+
+        ContentValues data = new ContentValues();
+        data.put(CreateDatabase.LEVEL, Integer.toString(level));
+        mSqLiteDatabase.update(database.TABLE, data, CreateDatabase.ID+"="+Integer.toString(id), null);
+
+        mSqLiteDatabase.close();
+        cursor.close();
+    }
+
+    void levelMinusOne(int id){
+        int level = 0;
+        SQLiteDatabase mSqLiteDatabase;
+        mSqLiteDatabase = database.getWritableDatabase();
+
+        String[] columns = {CreateDatabase.LEVEL};
+        String selection = CreateDatabase.ID+" = ? ";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = mSqLiteDatabase.query(database.TABLE, columns,
+                selection, selectionArgs, null, null, null);
+
+        if (cursor.getCount() > 0){
+            cursor.moveToNext();
+
+            level = Integer.parseInt(cursor.getString(cursor.getColumnIndex(CreateDatabase.LEVEL)));
+            level--;
+        }
+
+        ContentValues data = new ContentValues();
+        data.put(CreateDatabase.LEVEL, Integer.toString(level));
+        mSqLiteDatabase.update(database.TABLE, data, CreateDatabase.ID+"="+Integer.toString(id), null);
+
+        mSqLiteDatabase.close();
+        cursor.close();
+    }
+
+    int getLevelById(int id){
+        SQLiteDatabase mSqLiteDatabase;
+        mSqLiteDatabase = database.getReadableDatabase();
+
+        String[] columns = {CreateDatabase.LEVEL};
+        String selection = CreateDatabase.ID+" = ? ";
+        String[] selectionArgs = {String.valueOf(id)};
+        Cursor cursor = mSqLiteDatabase.query(database.TABLE, columns,
+                selection, selectionArgs, null, null, null);
+        if (cursor.getCount() <= 0){
+            mSqLiteDatabase.close();
+            cursor.close();
+            return 0;
+        }else {
+            cursor.moveToNext();
+            int level = Integer.parseInt(cursor.getString(cursor.getColumnIndex(CreateDatabase.LEVEL)));
+            mSqLiteDatabase.close();
+            cursor.close();
+            return level;
+        }
     }
 }

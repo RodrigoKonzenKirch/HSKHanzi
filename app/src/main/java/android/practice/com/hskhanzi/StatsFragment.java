@@ -81,8 +81,6 @@ public class StatsFragment extends Fragment{
                 mGridLayout.addView(mTextView);
             }
         }
-        mView.setBackgroundColor(Color.LTGRAY);
-
         return mView;
     }
 
